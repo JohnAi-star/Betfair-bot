@@ -1,0 +1,96 @@
+{
+  "name": "nags-n-dogs-lite-bot",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cross-platform trading automation UI - Phase 1",
+  "main": "dist-electron/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:vite\" \"npm run dev:electron\"",
+    "dev:vite": "vite",
+    "dev:electron": "wait-on tcp:5173 && cross-env IS_DEV=true electron .",
+    "build": "vite build && npm run build:electron",
+    "build:electron": "tsc -p electron",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "build": {
+    "appId": "com.nagsndogs.litebot",
+    "productName": "Nags 'N' Dogs Lite Bot",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.finance",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.7",
+    "@heroicons/react": "^2.2.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.344.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.18",
+    "concurrently": "^9.0.1",
+    "cross-env": "^7.0.3",
+    "electron": "^32.0.1",
+    "electron-builder": "^25.0.5",
+    "eslint": "^9.9.1",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.11",
+    "globals": "^15.9.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.3.0",
+    "vite": "^5.4.2",
+    "wait-on": "^8.0.1"
+  }
+}
